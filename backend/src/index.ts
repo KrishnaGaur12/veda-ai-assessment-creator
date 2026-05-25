@@ -15,7 +15,11 @@ const server = createServer(app);
 // Middleware
 app.use(
   cors({
-    origin: config.frontendUrl,
+    origin: [
+      config.frontendUrl,
+      "http://localhost:3000",
+      "https://veda-ai-assessment-creator.netlify.app"
+    ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders: ["Content-Type", "Authorization"],
