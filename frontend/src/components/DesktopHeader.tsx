@@ -3,7 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
-import { Bell, ChevronDown, ArrowLeft } from "lucide-react";
+import { Bell, ChevronDown, ArrowLeft, LayoutGrid } from "lucide-react";
 
 const DesktopHeader: React.FC = () => {
   const pathname = usePathname();
@@ -13,18 +13,17 @@ const DesktopHeader: React.FC = () => {
   const isSubPage = pathname.includes("/create") || pathname.includes("/output");
 
   return (
-    <div className="hidden lg:flex items-center justify-between px-8 py-3 bg-white border-b border-gray-100 w-full sticky top-0 z-30">
+    <div className="hidden lg:flex items-center justify-between px-6 py-3 mt-4 mb-6 bg-white rounded-[20px] border border-gray-100 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.08)] sticky top-4 z-30">
       {/* Left side */}
       <div className="flex-1">
-        {isSubPage && (
-          <button
-            onClick={() => router.back()}
-            className="flex items-center gap-2 text-[#888888] hover:text-[#1A1A1A] font-medium text-[14px] transition-colors"
-          >
-            <ArrowLeft size={16} />
-            <span>Assignment</span>
-          </button>
-        )}
+        <button
+          onClick={() => router.back()}
+          className="flex items-center gap-3 text-[#1A1A1A] font-semibold text-[15px] transition-colors hover:opacity-80"
+        >
+          <ArrowLeft size={18} className="text-[#888888]" />
+          <LayoutGrid size={18} className="text-[#AAAAAA]" />
+          <span>Assignment</span>
+        </button>
       </div>
 
       {/* Right side */}

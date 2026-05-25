@@ -5,9 +5,8 @@ VedaAI Assessment Creator is a full-stack web application that allows teachers t
 ## Screenshots
 
 <div style="display: flex; flex-direction: column; gap: 20px;">
-  <img src="./docs/screenshot-1.png" alt="Create Assignment UI" width="800" />
-  <img src="./docs/screenshot-2.png" alt="Question Types" width="800" />
-  <img src="./docs/screenshot-3.png" alt="Generated Output Paper" width="800" />
+  <img src="./docs/floating-1.png" alt="Assignments Layout" width="800" />
+  <img src="./docs/floating-2.png" alt="Generated Paper" width="800" />
 </div>
 
 ## Features

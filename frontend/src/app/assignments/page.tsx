@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Plus, Search, SlidersHorizontal, FileText } from "lucide-react";
 import AssignmentCard from "@/components/AssignmentCard";
@@ -70,32 +71,51 @@ const AssignmentsPage: React.FC = () => {
   if (assignments.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[80vh] px-6 relative">
-        <div className="relative mb-8 mt-12">
-          {/* Exact Figma Illustration approximation */}
-          <div className="w-48 h-48 relative flex items-center justify-center">
-            <div className="w-[120px] h-[140px] bg-white rounded-xl border border-gray-100 shadow-sm relative z-10 flex flex-col p-4 gap-3">
-              <div className="w-12 h-2.5 bg-gray-800 rounded-full" />
-              <div className="w-full h-1.5 bg-gray-200 rounded-full" />
-              <div className="w-3/4 h-1.5 bg-gray-200 rounded-full" />
-              <div className="w-full h-1.5 bg-gray-200 rounded-full" />
-              <div className="w-5/6 h-1.5 bg-gray-200 rounded-full" />
-            </div>
-            
-            {/* Magnifier with Red Cross */}
-            <div className="absolute right-4 -bottom-2 z-20 transform rotate-12">
-              <div className="w-20 h-20 rounded-full border-[6px] border-[#E8E8ED] bg-white/40 backdrop-blur-sm relative flex items-center justify-center shadow-sm">
-                <span className="text-[#FF4B4B] text-4xl font-bold leading-none -mt-1">×</span>
-                <div className="absolute top-[68px] -right-[6px] w-3 h-10 bg-[#E8E8ED] rounded-full transform -rotate-45 origin-top" />
+        <div className="relative mb-10 mt-12 w-64 h-64 flex items-center justify-center mx-auto">
+          {/* Base Circle Background */}
+          <div className="absolute inset-0 bg-gray-100/80 rounded-full scale-[0.85] z-0"></div>
+          
+          {/* Curvy line decorative */}
+          <svg className="absolute left-2 top-8 z-0 text-[#1A1A1A]" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+            <path d="M 35 15 C 25 15, 20 25, 10 25 C 0 25, 5 15, 15 15" strokeDasharray="3 3" />
+            <path d="M 35 15 C 30 15, 20 25, 5 20 C 0 18, 5 10, 15 12" />
+          </svg>
+
+          {/* Sparkles & Dots */}
+          <div className="absolute left-8 bottom-12 w-4 h-4 text-[#4285F4]">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0l2 8 8 2-8 2-2 8-2-8-8-2 8-2z"/></svg>
+          </div>
+          <div className="absolute right-6 top-1/2 w-2 h-2 bg-[#4285F4] rounded-full"></div>
+          <div className="absolute left-1/4 top-4 w-2 h-2 bg-[#EA4335] rounded-full"></div>
+
+          {/* Main Document */}
+          <div className="relative z-10 w-[90px] h-[120px] bg-white rounded-xl shadow-sm border border-gray-100 flex flex-col p-4 gap-3">
+            <div className="w-10 h-2 bg-[#1A1A1A] rounded-full"></div>
+            <div className="w-full h-1.5 bg-gray-200 rounded-full"></div>
+            <div className="w-full h-1.5 bg-gray-200 rounded-full"></div>
+            <div className="w-4/5 h-1.5 bg-gray-200 rounded-full"></div>
+          </div>
+
+          {/* Floating Card Top Right */}
+          <div className="absolute z-10 right-10 top-10 w-12 h-8 bg-white rounded-lg shadow-sm border border-gray-100 flex items-center px-2 gap-1.5">
+            <div className="w-1.5 h-1.5 rounded-full bg-[#A3A3B1]"></div>
+            <div className="w-5 h-2 rounded-full bg-gray-200"></div>
+          </div>
+
+          {/* Magnifying Glass with Red X */}
+          <div className="absolute z-20 right-12 bottom-12">
+            <div className="relative">
+              {/* Glass Handle */}
+              <div className="absolute -bottom-8 -right-6 w-10 h-3.5 bg-[#E8E8ED] rounded-full transform rotate-45 border border-white"></div>
+              {/* Glass Ring */}
+              <div className="w-[70px] h-[70px] rounded-full border-[6px] border-[#DCDCE4] bg-white/50 backdrop-blur-[2px] flex items-center justify-center relative z-10 shadow-sm">
+                {/* Red X */}
+                <div className="relative w-8 h-8 flex items-center justify-center transform rotate-45 text-[#FF4B4B]">
+                  <div className="absolute w-full h-1.5 bg-current rounded-full"></div>
+                  <div className="absolute h-full w-1.5 bg-current rounded-full"></div>
+                </div>
               </div>
             </div>
-            
-            {/* Decorative elements */}
-            <div className="absolute top-4 left-2 w-8 h-8 rounded-full border-2 border-gray-300" />
-            <div className="absolute top-10 -left-6 text-gray-400 rotate-12">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/></svg>
-            </div>
-            <div className="absolute top-12 -right-4 w-6 h-6 text-blue-400">✦</div>
-            <div className="absolute bottom-10 -left-8 w-4 h-4 text-blue-500">✦</div>
           </div>
         </div>
 
@@ -206,11 +226,11 @@ const AssignmentsPage: React.FC = () => {
         </Link>
       </div>
 
-      {/* Floating Create Button (Desktop) */}
-      <div className="hidden lg:flex fixed bottom-8 left-[calc(50%+130px)] -translate-x-1/2 z-30">
+      {/* Blurred Bottom Bar (Desktop) */}
+      <div className="hidden lg:flex fixed bottom-0 left-[260px] right-0 h-[120px] bg-gradient-to-t from-[#F4F4F5] via-[#F4F4F5]/90 to-transparent backdrop-blur-[3px] z-30 pointer-events-none items-end justify-center pb-8">
         <Link
           href="/assignments/create"
-          className="inline-flex items-center gap-2 px-6 py-3.5 bg-[#1A1A1A] text-white rounded-full font-semibold text-[15px] shadow-[0_8px_16px_-6px_rgba(26,26,26,0.4)] hover:shadow-xl hover:bg-black transition-all duration-200 active:scale-[0.97]"
+          className="pointer-events-auto inline-flex items-center gap-2 px-6 py-3.5 bg-[#1A1A1A] text-white rounded-full font-semibold text-[15px] shadow-[0_8px_16px_-6px_rgba(26,26,26,0.4)] hover:shadow-xl hover:bg-black transition-all duration-200 active:scale-[0.97]"
         >
           <Plus size={18} strokeWidth={2.5} />
           Create Assignment

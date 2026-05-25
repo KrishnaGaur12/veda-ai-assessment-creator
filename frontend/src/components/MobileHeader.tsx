@@ -10,10 +10,8 @@ const MobileHeader: React.FC = () => {
     <header className="sticky top-0 z-40 bg-white border-b border-gray-100 lg:hidden">
       <div className="flex items-center justify-between px-4 py-3">
         {/* Logo */}
-        <Link href="/assignments" className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-[#1A1A1A] flex items-center justify-center">
-            <Sparkles size={14} className="text-[#FF5B22]" />
-          </div>
+        <Link href="/assignments" className="flex items-center gap-2.5">
+          <Image src="/vedalogo.png" alt="VedaAI Logo" width={32} height={32} priority className="w-8 h-8 object-contain" />
           <span className="font-bold text-[16px] text-[#1A1A1A] tracking-tight">
             VedaAI
           </span>

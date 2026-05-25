@@ -5,11 +5,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
-  Home,
+  LayoutGrid,
   Users,
   FileText,
+  Smartphone,
+  Clock,
   Sparkles,
-  BookOpen,
   Settings,
 } from "lucide-react";
 
@@ -21,7 +22,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { label: "Home", href: "/", icon: <Home size={20} /> },
+  { label: "Home", href: "/", icon: <LayoutGrid size={20} /> },
   { label: "My Groups", href: "/groups", icon: <Users size={20} /> },
   {
     label: "Assignments",
@@ -31,9 +32,9 @@ const navItems: NavItem[] = [
   {
     label: "AI Teacher's Toolkit",
     href: "/ai-toolkit",
-    icon: <Sparkles size={20} />,
+    icon: <Smartphone size={20} />,
   },
-  { label: "My Library", href: "/library", icon: <BookOpen size={20} />, badge: 39 },
+  { label: "My Library", href: "/library", icon: <Clock size={20} /> },
 ];
 
 const Sidebar: React.FC = () => {
@@ -45,12 +46,10 @@ const Sidebar: React.FC = () => {
   };
 
   return (
-    <aside className="hidden lg:flex flex-col w-[260px] h-screen bg-white border-r border-gray-100 fixed left-0 top-0 z-40">
+    <aside className="hidden lg:flex flex-col w-[260px] h-[calc(100vh-32px)] m-4 bg-white rounded-[24px] border border-gray-100 shadow-[0_4px_24px_-8px_rgba(0,0,0,0.08)] fixed left-0 top-0 z-40">
       {/* Logo */}
       <div className="flex items-center gap-2.5 px-6 py-5">
-        <div className="w-9 h-9 rounded-xl bg-[#1A1A1A] flex items-center justify-center">
-          <Sparkles size={18} className="text-[#FF5B22]" />
-        </div>
+        <Image src="/vedalogo.png" alt="VedaAI Logo" width={36} height={36} priority className="w-9 h-9 object-contain" />
         <span className="font-bold text-[18px] text-[#1A1A1A] tracking-tight">
           VedaAI
         </span>
@@ -60,9 +59,9 @@ const Sidebar: React.FC = () => {
       <div className="px-5 pt-3 pb-2">
         <Link
           href="/assignments/create"
-          className="flex items-center justify-center gap-2.5 w-full py-3 bg-[#FF5B22] text-white rounded-full font-semibold text-[14px] hover:bg-[#e84f1c] transition-all duration-200 shadow-md shadow-[#FF5B22]/25 active:scale-[0.98]"
+          className="flex items-center justify-center gap-2.5 w-full py-3 bg-[#2C2C2E] text-white rounded-full font-semibold text-[15px] hover:bg-[#202022] transition-all duration-200 border-[3px] border-[#FF5B22]/80 shadow-[0_0_10px_rgba(255,91,34,0.3)] hover:shadow-[0_0_15px_rgba(255,91,34,0.5)] hover:border-[#FF5B22] active:scale-[0.98]"
         >
-          <Sparkles size={16} />
+          <Sparkles size={18} fill="white" className="text-white" />
           Create Assignment
         </Link>
       </div>
@@ -73,18 +72,16 @@ const Sidebar: React.FC = () => {
           <Link
             key={item.href}
             href={item.href}
-            className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-[14px] font-medium transition-all duration-200 group ${
-              isActive(item.href)
+            className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-[14px] font-medium transition-all duration-200 group ${isActive(item.href)
                 ? "bg-[#F4F4F5] text-[#1A1A1A] font-semibold"
                 : "text-[#888888] hover:bg-gray-50 hover:text-[#1A1A1A]"
-            }`}
+              }`}
           >
             <span
-              className={`transition-colors duration-200 ${
-                isActive(item.href)
+              className={`transition-colors duration-200 ${isActive(item.href)
                   ? "text-[#1A1A1A]"
                   : "text-[#AAAAAA] group-hover:text-[#888888]"
-              }`}
+                }`}
             >
               {item.icon}
             </span>

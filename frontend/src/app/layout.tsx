@@ -29,7 +29,7 @@ export default function RootLayout({
         <MobileHeader />
 
         {/* Main content area */}
-        <main className="lg:ml-[260px] min-h-screen pb-20 lg:pb-0">
+        <main className="lg:ml-[292px] min-h-screen pb-20 lg:pb-0 pr-4">
           <DesktopHeader />
           {children}
         </main>
