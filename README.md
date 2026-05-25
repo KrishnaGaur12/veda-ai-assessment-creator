@@ -15,6 +15,7 @@ VedaAI Assessment Creator is a full-stack web application that allows teachers t
 - **Asynchronous AI Generation:** Background processing using BullMQ prevents UI blocking during LLM generation.
 - **Real-Time Updates:** WebSockets push instant feedback to the frontend when generation finishes.
 - **PDF Export:** A headless Puppeteer engine dynamically renders the paper to a downloadable A4 PDF.
+- **PDF Context Parsing:** Extracts raw text from uploaded reference documents (using `pdf-parse`) and strictly restricts the AI to generate questions solely from the provided text.
 - **Structured LLM Output:** Uses the Gemini API with JSON schema enforcement to ensure strictly typed exam papers rather than raw text.
 
 ## Architecture
@@ -34,6 +35,7 @@ The system uses a modern monorepo separating client and server:
 - Google Gemini API for LLM generation
 - Socket.io for WebSocket notifications
 - Puppeteer for PDF generation
+- pdf-parse for extracting text from uploaded reference documents
 
 ```mermaid
 sequenceDiagram

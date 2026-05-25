@@ -4,6 +4,9 @@ import Assignment from "../models/Assignment";
 import GeneratedPaper from "../models/GeneratedPaper";
 import { generatePaper } from "../services/geminiService";
 import { broadcastMessage } from "../websocket/wsServer";
+import fs from "fs";
+import path from "path";
+import pdfParse from "pdf-parse";
 
 interface GenerationJobData {
   assignmentId: string;
@@ -36,7 +39,23 @@ export const startGenerationWorker = (): Worker => {
           assignmentId,
         });
 
-        // 3. Call Gemini to generate the paper
+        // 3. Extract text from PDF if available
+        let referenceText = undefined;
+        if (assignment.fileUrl && assignment.fileUrl.endsWith(".pdf")) {
+          try {
+            const filePath = path.join(__dirname, "../..", assignment.fileUrl);
+            if (fs.existsSync(filePath)) {
+              const dataBuffer = fs.readFileSync(filePath);
+              const data = await pdfParse(dataBuffer);
+              referenceText = data.text;
+              console.log(`📄 Extracted ${referenceText.length} characters from PDF reference`);
+            }
+          } catch (pdfErr) {
+            console.error("❌ Failed to parse PDF:", pdfErr);
+          }
+        }
+
+        // 4. Call Gemini to generate the paper
         const paperData = await generatePaper(
           assignment.questionTypes,
           assignment.totalQuestions,
@@ -44,7 +63,8 @@ export const startGenerationWorker = (): Worker => {
           assignment.additionalInstructions,
           assignment.title,
           assignment.subject,
-          assignment.class
+          assignment.class,
+          referenceText
         );
 
         // 4. Save the generated paper

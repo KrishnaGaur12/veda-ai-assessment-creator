@@ -32,7 +32,8 @@ const buildPrompt = (
   additionalInstructions: string,
   title: string,
   subject: string,
-  className: string
+  className: string,
+  referenceText?: string
 ): string => {
   const questionTypesList = questionTypes
     .map(
@@ -53,6 +54,15 @@ Question Types:
 ${questionTypesList}
 
 Additional Instructions: ${additionalInstructions || "None"}
+
+${referenceText ? `
+CRITICAL INSTRUCTION FOR REFERENCE TEXT:
+You MUST generate all questions based STRICTLY on the following reference text. Do not include outside knowledge. If the text does not contain enough information to generate the requested number of questions, only generate as many as the text logically supports.
+
+=== START REFERENCE TEXT ===
+${referenceText}
+=== END REFERENCE TEXT ===
+` : ""}
 
 Requirements:
 1. Distribute questions into sections by question type
@@ -102,7 +112,8 @@ export const generatePaper = async (
   additionalInstructions: string,
   title: string,
   subject: string,
-  className: string
+  className: string,
+  referenceText?: string
 ): Promise<GeneratedPaperResponse> => {
   try {
     if (!config.geminiApiKey) {
@@ -118,7 +129,8 @@ export const generatePaper = async (
       additionalInstructions,
       title,
       subject,
-      className
+      className,
+      referenceText
     );
 
     const response = await ai.models.generateContent({
