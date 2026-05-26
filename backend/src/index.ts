@@ -16,9 +16,8 @@ const server = createServer(app);
 app.use(
   cors({
     origin: [
-      config.frontendUrl,
-      "http://localhost:3000",
-      "https://veda-ai-assessment-creator.netlify.app"
+      "https://veda-ai-assessment-creator.netlify.app",
+      "http://localhost:3000"
     ],
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
